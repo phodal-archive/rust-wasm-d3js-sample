@@ -10,18 +10,22 @@ use web_sys::console;
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
+#[wasm_bindgen]
+pub struct Matual {
+    internal: i32,
+}
 
-// This is like the `main` function, except for JavaScript.
-#[wasm_bindgen(start)]
-pub fn main_js() -> Result<(), JsValue> {
-    // This provides better error messages in debug mode.
-    // It's disabled in release mode so it doesn't bloat up the file size.
-    #[cfg(debug_assertions)]
-    console_error_panic_hook::set_once();
+#[wasm_bindgen]
+impl Matual {
+    pub fn new(val: i32) -> Matual {
+        Matual { internal: val }
+    }
 
+    pub fn get(&self) -> i32 {
+        self.internal
+    }
 
-    // Your code goes here!
-    console::log_1(&JsValue::from_str("Hello world!"));
-
-    Ok(())
+    pub fn set(&mut self, val: i32) {
+        self.internal = val;
+    }
 }

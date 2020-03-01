@@ -89,29 +89,6 @@
               .attr('width', cfg.w + cfg.w + 50)
               .attr('height', cfg.h + cfg.h / 4);
       svg.append('g').classed('single', 1).datum(randomDataset()).call(chart);
-
-      // many radars
-      chart.config({w: cfg.w / 4, h: cfg.h / 4, axisText: false, levels: 0, circles: false});
-      cfg = chart.config();
-      function render() {
-        var game = svg.selectAll('g.game').data(
-                [
-                  randomDataset(),
-                  randomDataset(),
-                  randomDataset(),
-                  randomDataset()
-                ]
-        );
-        game.enter().append('g').classed('game', 1);
-        game
-                .attr('transform', function(d, i) { return 'translate('+((cfg.w * 4) + 50 + (i * cfg.w))+','+ (cfg.h * 1.3) +')'; })
-                .call(chart);
-
-        setTimeout(render, 1000);
-      }
-      render();
-
-
     </script>
   </body>
 </html>

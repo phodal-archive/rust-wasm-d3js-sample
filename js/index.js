@@ -36,8 +36,9 @@ import("../pkg/index.js")
     .then(wasm => {
         let matual = wasm.Matual.new(5);
         let originAlert = window.alert;
-        window.alert = function(message) {
-            renderChart(JSON.parse(message))
+        window.prompt = function (message, value) {
+            // console.log(message, value);
+            renderChart(JSON.parse(value))
         };
         matual.get_data_from_alert();
         window.alert = originAlert;

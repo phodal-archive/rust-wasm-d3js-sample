@@ -8,6 +8,7 @@ use std::os::raw::c_char;
 #[wasm_bindgen]
 extern "C" {
     fn alert(s: &str);
+    fn prompt(s: &str, m: &str);
 }
 
 // When the `wee_alloc` feature is enabled, this uses `wee_alloc` as the global
@@ -40,7 +41,7 @@ impl Matual {
     }
 
     pub fn get_data_from_alert(&self) {
-        alert(CHART_DATA);
+        prompt("chat", CHART_DATA);
     }
 
     #[no_mangle]

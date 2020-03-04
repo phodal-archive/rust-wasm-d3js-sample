@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 import RadarChart from "./radarChart";
 
-function renderChart() {
+function renderChart(data) {
     var margin = {top: 50, right: 80, bottom: 50, left: 80},
         width = Math.min(700, window.innerWidth / 4) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom);
@@ -9,45 +9,6 @@ function renderChart() {
     //////////////////////////////////////////////////////////////
     ////////////////////////// Data //////////////////////////////
     //////////////////////////////////////////////////////////////
-
-    var data = [
-        {
-            name: 'Allocated budget',
-            axes: [
-                {axis: 'Sales', value: 42},
-                {axis: 'Marketing', value: 20},
-                {axis: 'Development', value: 60},
-                {axis: 'Customer Support', value: 26},
-                {axis: 'Information Technology', value: 35},
-                {axis: 'Administration', value: 20}
-            ],
-            color: '#26AF32'
-        },
-        {
-            name: 'Actual Spending',
-            axes: [
-                {axis: 'Sales', value: 50},
-                {axis: 'Marketing', value: 45},
-                {axis: 'Development', value: 20},
-                {axis: 'Customer Support', value: 20},
-                {axis: 'Information Technology', value: 25},
-                {axis: 'Administration', value: 23}
-            ],
-            color: '#762712'
-        },
-        {
-            name: 'Further Test',
-            axes: [
-                {axis: 'Sales', value: 32},
-                {axis: 'Marketing', value: 62},
-                {axis: 'Development', value: 35},
-                {axis: 'Customer Support', value: 10},
-                {axis: 'Information Technology', value: 20},
-                {axis: 'Administration', value: 28}
-            ],
-            color: '#2a2fd4'
-        }
-    ];
 
     console.log(data[0].color);
 
@@ -93,7 +54,46 @@ import("../pkg/index.js")
     .then(wasm => {
         let matual = wasm.Matual.new(5);
         matual.set(10);
-        console.log(matual.get())
-        renderChart()
+        console.log(matual.get());
+
+        var data = [
+            {
+                name: 'Allocated budget',
+                axes: [
+                    {axis: 'Sales', value: 42},
+                    {axis: 'Marketing', value: 20},
+                    {axis: 'Development', value: 60},
+                    {axis: 'Customer Support', value: 26},
+                    {axis: 'Information Technology', value: 35},
+                    {axis: 'Administration', value: 20}
+                ],
+                color: '#26AF32'
+            },
+            {
+                name: 'Actual Spending',
+                axes: [
+                    {axis: 'Sales', value: 50},
+                    {axis: 'Marketing', value: 45},
+                    {axis: 'Development', value: 20},
+                    {axis: 'Customer Support', value: 20},
+                    {axis: 'Information Technology', value: 25},
+                    {axis: 'Administration', value: 23}
+                ],
+                color: '#762712'
+            },
+            {
+                name: 'Further Test',
+                axes: [
+                    {axis: 'Sales', value: 32},
+                    {axis: 'Marketing', value: 62},
+                    {axis: 'Development', value: 35},
+                    {axis: 'Customer Support', value: 10},
+                    {axis: 'Information Technology', value: 20},
+                    {axis: 'Administration', value: 28}
+                ],
+                color: '#2a2fd4'
+            }
+        ]
+        renderChart(data)
     })
     .catch(console.error);

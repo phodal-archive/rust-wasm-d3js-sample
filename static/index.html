@@ -1,91 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/pure-min.css">
-    <link rel="stylesheet" href="/css/radar-chart.css">
     <title>Matual - open source maturity model for developer.</title>
-    <style>
-      body {
-        padding: 20px;
-      }
-    </style>
+</head>
+<body>
 
-    <style>
-      .radar-chart .area {
-        fill-opacity: 0.7;
-      }
-      .radar-chart.focus .area {
-        fill-opacity: 0.3;
-      }
-      .radar-chart.focus .area.focused {
-        fill-opacity: 0.9;
-      }
-      .area.germany, .germany .circle {
-        fill: #FFD700;
-        stroke: none;
-      }
-      .area.argentina, .argentina .circle {
-        fill: #ADD8E6;
-        stroke: none;
-      }
-    </style>
-  </head>
-  <body>
-
-    <script src="index.js"></script>
-
-    <script src="/js/d3.v3.js"></script>
-    <script src="/js/radar-chart.js"></script>
-
-    <script>
-      RadarChart.defaultConfig.color = function() {};
-      RadarChart.defaultConfig.radius = 3;
-      RadarChart.defaultConfig.w = 400;
-      RadarChart.defaultConfig.h = 400;
-    </script>
-    <script>
-      var data = [
-        {
-          className: 'germany', // optional can be used for styling
-          axes: [
-            {axis: "strength", value: 13},
-            {axis: "intelligence", value: 6},
-            {axis: "charisma", value: 5},
-            {axis: "dexterity", value: 9},
-            {axis: "luck", value: 2}
-          ]
-        },
-        {
-          className: 'argentina',
-          axes: [
-            {axis: "strength", value: 6},
-            {axis: "intelligence", value: 7},
-            {axis: "charisma", value: 10},
-            {axis: "dexterity", value: 13},
-            {axis: "luck", value: 9}
-          ]
-        }
-      ];
-      function randomDataset() {
-        return data.map(function(d) {
-          return {
-            className: d.className,
-            axes: d.axes.map(function(axis) {
-              return {axis: axis.axis, value: Math.ceil(Math.random() * 10)};
-            })
-          };
-        });
-      }
-    </script>
-
-    <script>
-      var chart = RadarChart.chart();
-      var cfg = chart.config(); // retrieve default config
-      var svg = d3.select('body').append('svg')
-              .attr('width', cfg.w + cfg.w + 50)
-              .attr('height', cfg.h + cfg.h / 4);
-      svg.append('g').classed('single', 1).datum(randomDataset()).call(chart);
-    </script>
-  </body>
+<script src="index.js"></script>
+</body>
 </html>

@@ -35,8 +35,11 @@ function renderChart(data) {
 import("../pkg/index.js")
     .then(wasm => {
         let matual = wasm.Matual.new(5);
-        let chartData = matual.get_chart_data();
-        console.log(chartData);
-        var data = renderChart(chartData)
+        let originAlert = window.alert;
+        window.alert = function(message) {
+            renderChart(JSON.parse(message))
+        };
+        matual.get_data_from_alert();
+        window.alert = originAlert;
     })
     .catch(console.error);

@@ -1,3 +1,57 @@
+# Rust WASM D3.js sample
+
+process:
+
+1. loading WASM
+2. new Rust object
+3. mock window.prompt
+4. call Rust function, get data
+5. render D3.js chart
+6. revert window.prompt
+
+JavaScript Code Examples:
+
+```javascript
+let originAlert = window.alert;
+window.prompt = function (message, value) {
+    // console.log(message, value);
+    renderChart(JSON.parse(value))
+};
+matual.get_data_from_alert();
+window.alert = originAlert;
+```
+
+Rust Code To Get:
+
+```rust
+// Import the `window.alert` function from the Web.
+#[wasm_bindgen]
+extern "C" {
+    fn alert(s: &str);
+    fn prompt(s: &str, m: &str);
+}
+
+...
+
+#[wasm_bindgen]
+pub struct Matual {
+    internal: i32,
+}
+
+static CHART_DATA: &'static str = "[{\"name\":\"Allocated budget\",\"axes\":[{\"axis\":\"Sales\",\"value\":42},{\"axis\":\"Marketing\",\"value\":20},{\"axis\":\"Development\",\"value\":60},{\"axis\":\"Customer Support\",\"value\":26},{\"axis\":\"Information Technology\",\"value\":35},{\"axis\":\"Administration\",\"value\":20}],\"color\":\"#26AF32\"},{\"name\":\"Actual Spending\",\"axes\":[{\"axis\":\"Sales\",\"value\":50},{\"axis\":\"Marketing\",\"value\":45},{\"axis\":\"Development\",\"value\":20},{\"axis\":\"Customer Support\",\"value\":20},{\"axis\":\"Information Technology\",\"value\":25},{\"axis\":\"Administration\",\"value\":23}],\"color\":\"#762712\"},{\"name\":\"Further Test\",\"axes\":[{\"axis\":\"Sales\",\"value\":32},{\"axis\":\"Marketing\",\"value\":62},{\"axis\":\"Development\",\"value\":35},{\"axis\":\"Customer Support\",\"value\":10},{\"axis\":\"Information Technology\",\"value\":20},{\"axis\":\"Administration\",\"value\":28}],\"color\":\"#2a2fd4\"}]";
+
+#[wasm_bindgen]
+impl Matual {
+    pub fn new(val: i32) -> Matual {
+        Matual { internal: val }
+    }
+
+    pub fn get_data_from_alert(&self) {
+        prompt("chat", CHART_DATA);
+    }
+}
+```
+
 ## How to install
 
 ```sh

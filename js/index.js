@@ -35,47 +35,8 @@ function renderChart(data) {
 import("../pkg/index.js")
     .then(wasm => {
         let matual = wasm.Matual.new(5);
-        matual.set(10);
-        console.log(matual.get());
-
-        var data = [
-            {
-                name: 'Allocated budget',
-                axes: [
-                    {axis: 'Sales', value: 42},
-                    {axis: 'Marketing', value: 20},
-                    {axis: 'Development', value: 60},
-                    {axis: 'Customer Support', value: 26},
-                    {axis: 'Information Technology', value: 35},
-                    {axis: 'Administration', value: 20}
-                ],
-                color: '#26AF32'
-            },
-            {
-                name: 'Actual Spending',
-                axes: [
-                    {axis: 'Sales', value: 50},
-                    {axis: 'Marketing', value: 45},
-                    {axis: 'Development', value: 20},
-                    {axis: 'Customer Support', value: 20},
-                    {axis: 'Information Technology', value: 25},
-                    {axis: 'Administration', value: 23}
-                ],
-                color: '#762712'
-            },
-            {
-                name: 'Further Test',
-                axes: [
-                    {axis: 'Sales', value: 32},
-                    {axis: 'Marketing', value: 62},
-                    {axis: 'Development', value: 35},
-                    {axis: 'Customer Support', value: 10},
-                    {axis: 'Information Technology', value: 20},
-                    {axis: 'Administration', value: 28}
-                ],
-                color: '#2a2fd4'
-            }
-        ]
-        renderChart(data)
+        let chartData = matual.get_chart_data();
+        console.log(chartData);
+        var data = renderChart(chartData)
     })
     .catch(console.error);

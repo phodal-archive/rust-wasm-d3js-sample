@@ -1,6 +1,8 @@
 use wasm_bindgen::prelude::*;
 use web_sys::console;
 
+use std::ffi::CString;
+use std::os::raw::c_char;
 
 // When the `wee_alloc` feature is enabled, this uses `wee_alloc` as the global
 // allocator.
@@ -15,6 +17,47 @@ pub struct Matual {
     internal: i32,
 }
 
+static CHART_DATA: &'static str = "
+[
+    {
+        name: 'Allocated budget',
+        axes: [
+            {axis: 'Sales', value: 42},
+            {axis: 'Marketing', value: 20},
+            {axis: 'Development', value: 60},
+            {axis: 'Customer Support', value: 26},
+            {axis: 'Information Technology', value: 35},
+            {axis: 'Administration', value: 20}
+        ],
+        color: '#26AF32'
+    },
+    {
+        name: 'Actual Spending',
+        axes: [
+            {axis: 'Sales', value: 50},
+            {axis: 'Marketing', value: 45},
+            {axis: 'Development', value: 20},
+            {axis: 'Customer Support', value: 20},
+            {axis: 'Information Technology', value: 25},
+            {axis: 'Administration', value: 23}
+        ],
+        color: '#762712'
+    },
+    {
+        name: 'Further Test',
+        axes: [
+            {axis: 'Sales', value: 32},
+            {axis: 'Marketing', value: 62},
+            {axis: 'Development', value: 35},
+            {axis: 'Customer Support', value: 10},
+            {axis: 'Information Technology', value: 20},
+            {axis: 'Administration', value: 28}
+        ],
+        color: '#2a2fd4'
+    }
+]
+";
+
 #[wasm_bindgen]
 impl Matual {
     pub fn new(val: i32) -> Matual {
@@ -27,5 +70,11 @@ impl Matual {
 
     pub fn set(&mut self, val: i32) {
         self.internal = val;
+    }
+
+    #[no_mangle]
+    pub fn get_chart_data(&self) -> *mut c_char {
+        let s = CString::new(CHART_DATA).unwrap();
+        s.into_raw()
     }
 }

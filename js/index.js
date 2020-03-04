@@ -1,21 +1,11 @@
 import * as d3 from "d3";
-import RadarChart from "./radarChart";
+import RadarChart from "./graph/radarChart";
 
 function renderChart(data) {
     var margin = {top: 50, right: 80, bottom: 50, left: 80},
         width = Math.min(700, window.innerWidth / 4) - margin.left - margin.right,
         height = Math.min(width, window.innerHeight - margin.top - margin.bottom);
 
-    //////////////////////////////////////////////////////////////
-    ////////////////////////// Data //////////////////////////////
-    //////////////////////////////////////////////////////////////
-
-    console.log(data[0].color);
-
-    //////////////////////////////////////////////////////////////
-    ////// First example /////////////////////////////////////////
-    ///// (not so much options) //////////////////////////////////
-    //////////////////////////////////////////////////////////////
     var radarChartOptions = {
         w: 290,
         h: 350,
@@ -26,13 +16,7 @@ function renderChart(data) {
         format: '.0f'
     };
 
-    // Draw the chart, get a reference the created svg element :
     let svg_radar1 = RadarChart(".radarChart", data, radarChartOptions);
-
-    //////////////////////////////////////////////////////////////
-    ///// Second example /////////////////////////////////////////
-    ///// Chart legend, custom color, custom unit, etc. //////////
-    //////////////////////////////////////////////////////////////
     var radarChartOptions2 = {
         w: 290,
         h: 350,
@@ -45,8 +29,6 @@ function renderChart(data) {
         legend: {title: 'Organization XYZ', translateX: 100, translateY: 40},
         unit: '$'
     };
-
-    // Draw the chart, get a reference the created svg element :
     let svg_radar2 = RadarChart(".radarChart2", data, radarChartOptions2);
 }
 
